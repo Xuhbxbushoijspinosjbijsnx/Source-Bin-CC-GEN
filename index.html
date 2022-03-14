@@ -110,6 +110,23 @@
                         <a  name="gerar" id="gerar" class="btn btn-outline-secondary">
                             <i class="fa fa-cogs"></i> Generate
                         </a>
+                        <script type="text/javascript">
+                function onChange() {
+                    var fullcode = document.form1.fullcode.value
+                    var partcode = fullcode.substring(0, fullcode.length - 1)
+                    var checkdigit = fullcode.substring(fullcode.length - 1)
+                    var isvalid = luhn_validate(fullcode)
+                    var html_nocode = "&nbsp;"
+                    var html_valid = "<b><font color=green>This code is valid.</font></b>"
+                    var html_invalid = "<b><font color=red>This code is not valid.</font></b>"
+                    document.getElementById('isvalid').innerHTML = (fullcode == "") ? html_nocode : isvalid ? html_valid : html_invalid
+                    document.form1.partcode.value = partcode
+                    document.form1.checkdigit.value = checkdigit
+                    document.getElementById('partcode-side').innerHTML = partcode.length
+                    document.getElementById('fullcode-side').innerHTML = fullcode.length
+                }
+            </script>
+
                     </div>
                 </div>
                 <hr>
