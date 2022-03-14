@@ -110,23 +110,6 @@
                         <a  name="gerar" id="gerar" class="btn btn-outline-secondary">
                             <i class="fa fa-cogs"></i> Generate
                         </a>
-                        <script type="text/javascript">
-                function onChange() {
-                    var fullcode = document.form1.fullcode.value
-                    var partcode = fullcode.substring(0, fullcode.length - 1)
-                    var checkdigit = fullcode.substring(fullcode.length - 1)
-                    var isvalid = luhn_validate(fullcode)
-                    var html_nocode = "&nbsp;"
-                    var html_valid = "<b><font color=green>This code is valid.</font></b>"
-                    var html_invalid = "<b><font color=red>This code is not valid.</font></b>"
-                    document.getElementById('isvalid').innerHTML = (fullcode == "") ? html_nocode : isvalid ? html_valid : html_invalid
-                    document.form1.partcode.value = partcode
-                    document.form1.checkdigit.value = checkdigit
-                    document.getElementById('partcode-side').innerHTML = partcode.length
-                    document.getElementById('fullcode-side').innerHTML = fullcode.length
-                }
-            </script>
-
                     </div>
                 </div>
                 <hr>
@@ -160,6 +143,118 @@
         </div>
     </div>
 </main>
+    <div class="container">
+
+<!-- ------------------------------------------------------- content -->
+
+            <h1>Luhn algorithm - Validate code number</h1>
+
+            <p>
+                Validate a code number using the <a href="https://en.wikipedia.org/wiki/Luhn_algorithm">Luhn algorithm</a>.
+            </p>
+            <p>
+                Fill in the box below to have it instantly computed.
+            </p>
+            <p>
+                The Luhn algorithm, a simple checksum verification algorithm, is also known as Luhn formula, modulus 10 algorithm, or mod 10 algorithm.
+                It is most notably used to validate <a href="https://en.wikipedia.org/wiki/Credit_card_number">credit card numbers</a>
+                and <a href="https://en.wikipedia.org/wiki/IMEI">IMEI phone identification numbers</a>.
+            </p>
+
+            <script type="text/javascript">
+                function onChange() {
+                    var fullcode = document.form1.fullcode.value
+                    var partcode = fullcode.substring(0, fullcode.length - 1)
+                    var checkdigit = fullcode.substring(fullcode.length - 1)
+                    var isvalid = luhn_validate(fullcode)
+                    var html_nocode = "Â "
+                    var html_valid = "<b><font color=green>This code is valid.</font></b>"
+                    var html_invalid = "<b><font color=red>This code is not valid.</font></b>"
+                    document.getElementById('isvalid').innerHTML = (fullcode == "") ? html_nocode : isvalid ? html_valid : html_invalid
+                    document.form1.partcode.value = partcode
+                    document.form1.checkdigit.value = checkdigit
+                    document.getElementById('partcode-side').innerHTML = partcode.length
+                    document.getElementById('fullcode-side').innerHTML = fullcode.length
+                }
+            </script>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <form
+                        name="form1"
+                    >
+                        <div class="form-group form-row">
+                            <label for="fullcode" class="col-sm-3 col-form-label">
+                                Full Code
+                            </label>
+                            <div class="col-sm-7 offset-sm-0">
+                                <input
+                                    type="text"
+                                    id="fullcode" name="fullcode"
+                                    class="form-control"
+                                    aria-describedby="fullcode-hint"
+                                    onchange="onChange()" onkeyup="onChange()"
+                                />
+                                <small id="fullcode-hint" name="fullcode-hint" class="form-text text-muted">
+                                    enter numbers only, <u>including</u> check digit
+                                </small>
+                            </div>
+                            <div class="col-sm-2 col-form-label">
+                                <small  class="text-muted">
+                                    <span id="fullcode-side" name="fullcode-side">0</span> digits
+                                </small>
+                            </div>
+                        </div>
+                        <div class="form-group form-row">
+                            <div class="col-sm-7 offset-sm-3">
+                                <span
+                                    id="isvalid" name="isvalid"
+                                    class="form-text"
+                                >Â </span>
+                            </div>
+                        </div>
+                        <div class="form-group form-row">
+                            <label for="partcode" class="col-sm-3 col-form-label">
+                                Original Code
+                            </label>
+                            <div class="col-sm-7 offset-sm-0">
+                                <input
+                                    type="text"
+                                    id="partcode" name="partcode"
+                                    class="form-control"
+                                    aria-describedby="partcode-hint"
+                                    readonly
+                                />
+                                <small id="partcode-hint" name="partcode-hint" class="form-text text-muted">
+                                    calculated, without trailing check digit
+                                </small>
+                            </div>
+                            <div class="col-sm-2 col-form-label">
+                                <small  class="text-muted">
+                                    <span id="partcode-side" name="partcode-side">0</span> digits
+                                </small>
+                            </div>
+                        </div>
+                        <div class="form-group form-row">
+                            <label for="checkdigit" class="col-sm-3 col-form-label">
+                                Check Digit
+                            </label>
+                            <div class="col-sm-2 offset-sm-0">
+                                <input
+                                    type="text"
+                                    id="checkdigit" name="checkdigit"
+                                    class="form-control"
+                                    aria-describedby="checkdigit-hint"
+                                    readonly
+                                />
+                                <small id="checkdigit-hint" name="checkdigit-hint" class="form-text text-muted">
+                                    calculated
+                                </small>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
  
 </footer>    <script src="https:///cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
